@@ -106,7 +106,7 @@ java {
 }
 
 tasks.withType(JavaCompile) {
-	options.release.set 8
+	options.release.set 16
 }
 
 jar {

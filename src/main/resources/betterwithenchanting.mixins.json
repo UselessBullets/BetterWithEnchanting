@@ -1,9 +1,14 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "turniplabs.examplemod.mixin",
+    "package": "googy.betterwithenchanting.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+      "MinecraftMixin",
+      "ItemStackMixin",
+      "NetServerHandlerMixin",
+      "PacketMixin",
+      "GuiTooltipMixin"
     ],
     "client": [
     ],
