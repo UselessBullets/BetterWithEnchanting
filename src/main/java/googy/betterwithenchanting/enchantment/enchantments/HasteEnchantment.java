@@ -17,4 +17,16 @@ public class HasteEnchantment extends Enchantment
 	{
 		return 3;
 	}
+
+	@Override
+	public int getMinEnchantability(int level)
+	{
+		return 1 + (level - 1) + 10;
+	}
+
+	@Override
+	public int getMaxEnchantability(int level)
+	{
+		return super.getMinEnchantability(level) + 50;
+	}
 }

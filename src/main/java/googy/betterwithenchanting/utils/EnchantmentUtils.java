@@ -2,17 +2,15 @@ package googy.betterwithenchanting.utils;
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
+import googy.betterwithenchanting.BetterWithEnchanting;
 import googy.betterwithenchanting.Global;
 import googy.betterwithenchanting.enchantment.Enchantment;
 import googy.betterwithenchanting.enchantment.EnchantmentData;
 import googy.betterwithenchanting.enchantment.Enchantments;
-import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.util.helper.MathHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class EnchantmentUtils
 {
@@ -143,28 +141,63 @@ public class EnchantmentUtils
 		return 0;
 	}
 
+	public static List<EnchantmentData> getPossible(ItemStack stack, int enchantability)
+	{
+		List<EnchantmentData> list = new ArrayList<>();
+		Item item = stack.getItem();
+
+		for (Enchantment enchantment : Enchantments.enchantmentList)
+		{
+			if (enchantment == null || !enchantment.canEnchant(item)) continue;
+
+			for (int level = enchantment.getMinLevel(); level <= enchantment.getMaxLevel(); level++)
+			{
+				BetterWithEnchanting.LOG.info("level: " + level  + " enchantability: " + enchantability + " min: " + enchantment.getMinEnchantability(level) + " max: " + enchantment.getMaxEnchantability(level));
+				if (enchantability >= enchantment.getMinEnchantability(level) && enchantability <= enchantment.getMaxEnchantability(level))
+				{
+					list.add(new EnchantmentData(enchantment, level));
+				}
+			}
+		}
+
+
+		return list;
+	}
 
 	public static List<EnchantmentData> generateEnchantmentsList(Random random, ItemStack stack, int cost)
 	{
 		List<EnchantmentData> enchantments = new ArrayList<>();
-		List<Enchantment> pool = Enchantments.getPossible(stack.getItem());
-
 		double costPercentage = (double) cost / Global.MAX_ENCHANTMENT_COST;
 
-		int amount = random.nextInt((int) Math.ceil(Global.MAX_ENCHANTS_PER_ENCHANT * costPercentage)) + 1;
-		for (int i = 0; i < amount; i++)
+		int itemEnchantability = 15;
+
+		int rand_enchantability = 1 + random.nextInt(itemEnchantability / 4 + 1) + random.nextInt(itemEnchantability / 4 + 1);
+		int k = (int) (costPercentage * (30 - 1) + 1) + rand_enchantability;
+		float rand_bonus_percent = 1 + (random.nextFloat() + random.nextFloat() - 1) * 0.15f;
+
+		int enchantability = Math.round(k * rand_bonus_percent);
+		if (enchantability < 0) enchantability = 1;
+
+		List<EnchantmentData> possibleEnchantments = getPossible(stack, enchantability);
+		if (possibleEnchantments.isEmpty()) return null;
+
+		EnchantmentData randomEnchantment = possibleEnchantments.get(random.nextInt(possibleEnchantments.size()));
+		if (randomEnchantment != null)
 		{
-			if (pool.isEmpty()) break;
+			enchantments.add(randomEnchantment);
+			possibleEnchantments.remove(randomEnchantment);
+		}
 
-			Enchantment randomEnchantment = pool.get(random.nextInt(pool.size()));
-			pool.remove(randomEnchantment);
+		for (int i = enchantability; random.nextInt(50) <= i; i >>= 1)
+		{
+			if (possibleEnchantments.isEmpty()) continue;
 
-			int randomLevel = (int) Math.round(costPercentage * (randomEnchantment.getMaxLevel() - randomEnchantment.getMinLevel()) + randomEnchantment.getMinLevel());
-			randomLevel += random.nextInt(3) - 1;
-
-			randomLevel = MathHelper.clamp(randomLevel, randomEnchantment.getMinLevel(), randomEnchantment.getMaxLevel());
-
-			enchantments.add(new EnchantmentData(randomEnchantment, randomLevel));
+			randomEnchantment = possibleEnchantments.get(random.nextInt(possibleEnchantments.size()));
+			if (randomEnchantment != null)
+			{
+				enchantments.add(randomEnchantment);
+				possibleEnchantments.remove(randomEnchantment);
+			}
 		}
 
 		return enchantments;

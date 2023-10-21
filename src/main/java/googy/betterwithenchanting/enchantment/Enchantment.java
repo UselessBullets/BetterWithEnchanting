@@ -57,6 +57,16 @@ public class Enchantment
 		return 1;
 	}
 
+	public int getMinEnchantability(int level)
+	{
+		return 1 + level * 10;
+	}
+
+	public int getMaxEnchantability(int level)
+	{
+		return this.getMinEnchantability(level) + 5;
+	}
+
 	public void onTargetDamaged(EntityLiving user, Entity target, int level) {
 
 	}

@@ -9,6 +9,7 @@ import googy.betterwithenchanting.player.inventory.slot.EnchantFuelSlot;
 import googy.betterwithenchanting.utils.EnchantmentUtils;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
@@ -44,6 +45,8 @@ public class ContainerEnchantmentTable extends Container
 		for (int i = 0; i < 9; ++i) {
 			this.addSlot(new Slot(inventoryplayer, i, 8 + i * 18, 142));
 		}
+
+		updateEnchantmentsCosts();
 	}
 
 
@@ -53,10 +56,15 @@ public class ContainerEnchantmentTable extends Container
 
 		int cost = enchantCost[enchantOption];
 		if (player.gamemode.id != Gamemode.creative.id)
+		{
 			player.score -= cost;
+			if (getSlot(1).hasStack())
+				getSlot(1).getStack().stackSize -= enchantOption + 1;
+		}
 
 		ItemStack stack = getSlot(0).getStack();
 		List<EnchantmentData> enchantments = EnchantmentUtils.generateEnchantmentsList(random, stack, cost);
+		if (enchantments == null) return false;
 
 		EnchantmentUtils.addEnchantments(stack, enchantments);
 		updateInventory();
@@ -64,8 +72,14 @@ public class ContainerEnchantmentTable extends Container
 		return true;
 	}
 
+
 	@Override
 	public void onCraftMatrixChanged(IInventory iinventory)
+	{
+		updateEnchantmentsCosts();
+	}
+
+	void updateEnchantmentsCosts()
 	{
 		ItemStack stack = getSlot(0).getStack();
 		if (stack == null) return;
@@ -111,31 +125,37 @@ public class ContainerEnchantmentTable extends Container
 		if (bookshelfs > 15)
 			bookshelfs = 15;
 
-		BetterWithEnchanting.LOG.info("bookshelfs: " + bookshelfs);
 		for (int i = 0; i < 3; i++)
 		{
 			enchantCost[i] = EnchantmentUtils.calcEnchantmentCost(i, bookshelfs);
-			BetterWithEnchanting.LOG.info(i + " = " + enchantCost[i]);
 		}
-		BetterWithEnchanting.LOG.info("==============================");
-
 	}
+
 
 	public boolean playerCanEnchant(EntityPlayer player, int option)
 	{
+		//BetterWithEnchanting.LOG.info(option+" "+getFuelAmount());
+
 		return getSlot(0).hasStack() &&
 			EnchantmentUtils.getEnchantments(getSlot(0).getStack()).isEmpty() &&
-			(player.score >= enchantCost[option] || player.gamemode.id == Gamemode.creative.id);
+			(player.score >= enchantCost[option] || player.gamemode.id == Gamemode.creative.id) &&
+			(getFuelAmount() > option || player.gamemode.id == Gamemode.creative.id);
+	}
+
+	public int getFuelAmount()
+	{
+		if (!getSlot(1).hasStack()) return 0;
+		return getSlot(1).getStack().stackSize;
 	}
 
 	@Override
-	public List<Integer> getMoveSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer)
+	public List<Integer> getMoveSlots(InventoryAction action, Slot slot, int target, EntityPlayer entityPlayer)
 	{
 		return null;
 	}
 
 	@Override
-	public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer)
+	public List<Integer> getTargetSlots(InventoryAction action, Slot slot, int target, EntityPlayer entityPlayer)
 	{
 		return null;
 	}
