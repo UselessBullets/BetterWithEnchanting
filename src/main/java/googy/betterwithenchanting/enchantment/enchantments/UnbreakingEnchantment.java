@@ -43,6 +43,6 @@ public class UnbreakingEnchantment extends Enchantment
 	public static boolean shouldNegateDamage(ItemStack stack, int level)
 	{
 		if (stack.getItem() instanceof ItemArmor && random.nextFloat() < 0.6f) return true;
-		return random.nextInt(level + 1) > 0;
+		return random.nextInt(level) > 0;
 	}
 }

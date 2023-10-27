@@ -2,7 +2,6 @@ package googy.betterwithenchanting.utils;
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
-import googy.betterwithenchanting.BetterWithEnchanting;
 import googy.betterwithenchanting.Global;
 import googy.betterwithenchanting.enchantment.Enchantment;
 import googy.betterwithenchanting.enchantment.EnchantmentData;
@@ -152,7 +151,6 @@ public class EnchantmentUtils
 
 			for (int level = enchantment.getMinLevel(); level <= enchantment.getMaxLevel(); level++)
 			{
-				BetterWithEnchanting.LOG.info("level: " + level  + " enchantability: " + enchantability + " min: " + enchantment.getMinEnchantability(level) + " max: " + enchantment.getMaxEnchantability(level));
 				if (enchantability >= enchantment.getMinEnchantability(level) && enchantability <= enchantment.getMaxEnchantability(level))
 				{
 					list.add(new EnchantmentData(enchantment, level));

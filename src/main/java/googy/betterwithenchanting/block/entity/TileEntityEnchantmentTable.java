@@ -2,6 +2,7 @@ package googy.betterwithenchanting.block.entity;
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
+import googy.betterwithenchanting.Global;
 import googy.betterwithenchanting.enchantment.Enchantments;
 import googy.betterwithenchanting.utils.EnchantmentUtils;
 import net.minecraft.core.block.entity.TileEntity;
@@ -93,7 +94,7 @@ public class TileEntityEnchantmentTable extends TileEntity implements IInventory
 	@Override
 	public String getInvName()
 	{
-		return "Enchantment Table";
+		return Global.ENCHANTMENT_TABLE_NAME;
 	}
 
 	@Override

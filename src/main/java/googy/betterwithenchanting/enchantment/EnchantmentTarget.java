@@ -14,6 +14,7 @@ public class EnchantmentTarget
 	public static final ArmorLegs ARMOR_LEGS = new ArmorLegs();
 	public static final ArmorFeet ARMOR_FEET = new ArmorFeet();
 	public static final Digger DIGGER = new Digger();
+	public static final Weapon WEAPON = new Weapon();
 	public static final Sword SWORD = new Sword();
 	public static final Bow BOW = new Bow();
 	public static final FishingRod FISHING_ROD = new FishingRod();
@@ -75,7 +76,16 @@ public class EnchantmentTarget
 		}
 	}
 
-	public static class Sword extends EnchantmentTarget
+	public static class Weapon extends EnchantmentTarget
+	{
+		public boolean canEnchant(Item item)
+		{
+			return item instanceof ItemToolSword ||
+				item instanceof ItemBow;
+		}
+	}
+
+	public static class Sword extends Weapon
 	{
 		public boolean canEnchant(Item item)
 		{
@@ -83,7 +93,7 @@ public class EnchantmentTarget
 		}
 	}
 
-	public static class Bow extends EnchantmentTarget
+	public static class Bow extends Weapon
 	{
 		public boolean canEnchant(Item item)
 		{

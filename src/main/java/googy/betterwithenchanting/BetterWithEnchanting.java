@@ -32,12 +32,18 @@ public class BetterWithEnchanting implements ModInitializer {
 
 	static {
 		EntityHelper.createTileEntity(TileEntityEnchantmentTable.class, "EnchantmentTable");
-		//NetworkHelper.register(PacketEnchantItem.class, true, false);
-		PacketMixin.callAddIdClassMapping(301, false, true, PacketEnchantItem.class);
+
 	}
+
+	public BetterWithEnchanting()
+	{
+		PacketMixin.callAddIdClassMapping(Global.PACKET_ENCHANT_ID, false, true, PacketEnchantItem.class);
+	}
+
 
     @Override
     public void onInitialize() {
+
 		LOG.info("BetterWithEnchanting initialized!");
 
     }

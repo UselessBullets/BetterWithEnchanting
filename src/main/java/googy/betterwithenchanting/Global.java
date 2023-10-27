@@ -10,4 +10,9 @@ public class Global
 
 	public static int START_COST_OFFSET = 5;
 
+	public static int ENCHANTMENT_WINDOW_TYPE_ID = 24;
+
+	public static String ENCHANTMENT_TABLE_NAME = "Enchantment Table";
+
+	public static int PACKET_ENCHANT_ID = 190;
 }

@@ -1,6 +1,5 @@
 package googy.betterwithenchanting.player.inventory;
 
-import googy.betterwithenchanting.BetterWithEnchanting;
 import googy.betterwithenchanting.block.entity.TileEntityEnchantmentTable;
 import googy.betterwithenchanting.enchantment.Enchantment;
 import googy.betterwithenchanting.enchantment.EnchantmentData;
@@ -77,17 +76,21 @@ public class ContainerEnchantmentTable extends Container
 	public void onCraftMatrixChanged(IInventory iinventory)
 	{
 		updateEnchantmentsCosts();
+		super.onCraftMatrixChanged(iinventory);
 	}
 
 	void updateEnchantmentsCosts()
 	{
+		World world = enchantmentTable.worldObj;
+		if (world == null) return;
+
 		ItemStack stack = getSlot(0).getStack();
+
 		if (stack == null) return;
 
 		List<Enchantment> pool = Enchantments.getPossible(stack.getItem());
 		if (pool.isEmpty()) return;
 
-		World world = enchantmentTable.worldObj;
 
 		int posX = enchantmentTable.xCoord;
 		int posY = enchantmentTable.yCoord;
@@ -131,6 +134,26 @@ public class ContainerEnchantmentTable extends Container
 		}
 	}
 
+	@Override
+	public void updateInventory()
+	{
+		super.updateInventory();
+
+		for (ICrafting crafting : crafters)
+		{
+			for (int i = 0; i < enchantCost.length; i++)
+			{
+				crafting.updateCraftingInventoryInfo(this, i, enchantCost[i]);
+			}
+		}
+	}
+
+	@Override
+	public void updateClientProgressBar(int id, int value)
+	{
+		if (id >= 0 && id < enchantCost.length)
+			enchantCost[id] = value;
+	}
 
 	public boolean playerCanEnchant(EntityPlayer player, int option)
 	{

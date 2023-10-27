@@ -9,15 +9,15 @@ public class TextUtils
 		return formatting.toString() + text + TextFormatting.RESET.toString();
 	}
 
-	public static String format(String text, TextFormatting... formattings)
+	public static String format(String text, TextFormatting... formatting)
 	{
-		StringBuilder f = new StringBuilder();
+		StringBuilder format = new StringBuilder();
 
-		for (TextFormatting formatting : formattings)
+		for (TextFormatting f : formatting)
 		{
-			f.append(formatting.toString());
+			format.append(f.toString());
 		}
 
-		return f + text + TextFormatting.RESET.toString();
+		return format + text + TextFormatting.RESET.toString();
 	}
 }

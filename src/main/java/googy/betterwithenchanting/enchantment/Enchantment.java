@@ -16,7 +16,7 @@ public class Enchantment
 	public final EnchantmentTarget target;
 
 
-	protected Enchantment(String name, int id, Rarity weight, EnchantmentTarget target) {
+	public Enchantment(String name, int id, Rarity weight, EnchantmentTarget target) {
 		this.id = id;
 		Enchantments.enchantmentList[id] = this;
 		setKey(name);

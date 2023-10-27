@@ -1,6 +1,5 @@
 package googy.betterwithenchanting.gui;
 
-import googy.betterwithenchanting.BetterWithEnchanting;
 import googy.betterwithenchanting.block.entity.TileEntityEnchantmentTable;
 import googy.betterwithenchanting.network.packet.PacketEnchantItem;
 import googy.betterwithenchanting.player.inventory.ContainerEnchantmentTable;
@@ -9,7 +8,6 @@ import googy.betterwithenchanting.utils.TextUtils;
 import net.minecraft.client.entity.player.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.core.net.command.TextFormatting;
-import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 
 public class GuiEnchantmentTable extends GuiContainer
@@ -75,7 +73,7 @@ public class GuiEnchantmentTable extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float delta)
 	{
-		int guiTexture = GuiUtils.getGuiTexture("enchantment_table1.png");
+		int guiTexture = GuiUtils.getGuiTexture("enchantment_table.png");
 		mc.renderEngine.bindTexture(guiTexture);
 
 		int x = (width - xSize) / 2;
@@ -87,8 +85,6 @@ public class GuiEnchantmentTable extends GuiContainer
 		int buttonWidth = 108;
 		int buttonHeight = 19;
 
-		int levelWidth = 16;
-		int levelHeight = 16;
 		int levelSize = 16;
 
 		// draw enchant buttons
@@ -136,7 +132,7 @@ public class GuiEnchantmentTable extends GuiContainer
 			int fontHeight = mc.fontRenderer.fontHeight;
 
 			mc.fontRenderer.drawStringWithShadow(scoreText, xPos - scoreWidth/2, yPos, 0xFFFFFF);
-			mc.fontRenderer.drawStringWithShadow(scoreNumberText, xPos - scoreNumberWidth/2, yPos + 1 + fontHeight, 0xFFFFFF);
+			mc.fontRenderer.drawStringWithShadow(scoreNumberText, xPos - scoreNumberWidth/2, yPos + fontHeight + 1, 0xFFFFFF);
 		}
 
 
