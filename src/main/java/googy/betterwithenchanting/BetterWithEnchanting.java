@@ -54,7 +54,7 @@ public class BetterWithEnchanting implements ModInitializer {
 
 	public BetterWithEnchanting()
 	{
-		PacketMixin.callAddIdClassMapping(Global.PACKET_ENCHANT_ID, false, true, PacketEnchantItem.class);
+		PacketMixin.callAddIdClassMapping(Global.config.getInt("packet_enchant_id"), false, true, PacketEnchantItem.class);
 	}
 
 

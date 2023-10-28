@@ -38,7 +38,7 @@ public abstract class EntityPlayerMPMixin extends EntityPlayer implements IEntit
 		this.playerNetServerHandler.sendPacket(
 			new Packet100OpenWindow(
 				this.currentWindowId,
-				Global.ENCHANTMENT_WINDOW_TYPE_ID,
+				Global.config.getInt("enchantment_window_type_id"),
 				enchantmentTable.getInvName(),
 				enchantmentTable.getSizeInventory()
 		));

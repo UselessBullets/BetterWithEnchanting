@@ -26,7 +26,7 @@ public class NetClientHandlerMixin
 	@Inject(method = "handleOpenWindow", at = @At("TAIL"))
 	public void handleOpenWindow(Packet100OpenWindow packet, CallbackInfo info)
 	{
-		if (packet.inventoryType != Global.ENCHANTMENT_WINDOW_TYPE_ID) return;
+		if (packet.inventoryType != Global.config.getInt("enchantment_window_type_id")) return;
 		if (!packet.windowTitle.equals(Global.ENCHANTMENT_TABLE_NAME)) return;
 
 		TileEntityEnchantmentTable tile = new TileEntityEnchantmentTable();

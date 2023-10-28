@@ -164,7 +164,7 @@ public class EnchantmentUtils
 	public static List<EnchantmentData> generateEnchantmentsList(Random random, ItemStack stack, int cost)
 	{
 		List<EnchantmentData> enchantments = new ArrayList<>();
-		double costPercentage = (double) cost / Global.MAX_ENCHANTMENT_COST;
+		double costPercentage = (double) cost / Global.config.getInt("max_enchantment_cost");
 
 		int itemEnchantability = Global.config.getInt("default_item_enchantability");
 
@@ -205,7 +205,7 @@ public class EnchantmentUtils
 		double percentage = (bookshelfs + Global.START_COST_OFFSET) / (15.0 + Global.START_COST_OFFSET);
 		percentage *= (enchantOption + 1) / 3.0;
 
-		return (int) (Global.MAX_ENCHANTMENT_COST * percentage);
+		return (int) (Global.config.getInt("max_enchantment_cost") * percentage);
 	}
 
 }

@@ -4,11 +4,11 @@ import googy.betterwithenchanting.block.entity.TileEntityEnchantmentTable;
 import googy.betterwithenchanting.network.packet.PacketEnchantItem;
 import googy.betterwithenchanting.inventory.ContainerEnchantmentTable;
 import googy.betterwithenchanting.utils.GuiUtils;
-import googy.betterwithenchanting.utils.TextUtils;
 import net.minecraft.client.entity.player.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
+import org.lwjgl.opengl.GL11;
 
 public class GuiEnchantmentTable extends GuiContainer
 {
@@ -73,6 +73,8 @@ public class GuiEnchantmentTable extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float delta)
 	{
+		GL11.glColor4f(1, 1, 1, 1);
+
 		int guiTexture = GuiUtils.getGuiTexture("enchantment_table.png");
 		mc.renderEngine.bindTexture(guiTexture);
 
@@ -126,15 +128,15 @@ public class GuiEnchantmentTable extends GuiContainer
 			int yPos = y + 10;
 
 			String scoreText = "Score:";
-			String scoreNumberText = TextUtils.format(String.valueOf(mc.thePlayer.score), TextFormatting.YELLOW);
+			String scoreNumberText = String.valueOf(mc.thePlayer.score);
 			int scoreWidth = mc.fontRenderer.getStringWidth(scoreText);
 			int scoreNumberWidth = mc.fontRenderer.getStringWidth(scoreNumberText);
 			int fontHeight = mc.fontRenderer.fontHeight;
 
 			mc.fontRenderer.drawStringWithShadow(scoreText, xPos - scoreWidth/2, yPos, 0xFFFFFF);
-			mc.fontRenderer.drawStringWithShadow(scoreNumberText, xPos - scoreNumberWidth/2, yPos + fontHeight + 1, 0xFFFFFF);
+			mc.fontRenderer.drawStringWithShadow(scoreNumberText, xPos - scoreNumberWidth/2, yPos + fontHeight + 1, 16777088);
 		}
 
-
+		GL11.glColor4f(1, 1, 1, 1);
 	}
 }

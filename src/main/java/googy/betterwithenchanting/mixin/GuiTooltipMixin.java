@@ -2,10 +2,8 @@ package googy.betterwithenchanting.mixin;
 
 import googy.betterwithenchanting.enchantment.EnchantmentData;
 import googy.betterwithenchanting.utils.EnchantmentUtils;
-import googy.betterwithenchanting.utils.TextUtils;
 import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.lang.I18n;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.slot.Slot;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,8 +29,11 @@ public class GuiTooltipMixin
 			boolean isNull = enchantData.enchantment == null;
 			boolean noLevel = isNull || enchantData.enchantment.getMinLevel() == enchantData.enchantment.getMaxLevel();
 
-			String enchantName = isNull ? "Unknown" : TextUtils.format(enchantData.enchantment.getName(), TextFormatting.LIGHT_GRAY);
-            String enchantLevel = noLevel ? "" : TextUtils.format(String.valueOf(enchantData.level), TextFormatting.YELLOW);
+			String enchantName = isNull ? "Unknown" : enchantData.enchantment.getName();
+            String enchantLevel = noLevel ? "" : String.valueOf(enchantData.level);
+
+			enchantName = TextFormatting.formatted(enchantName, TextFormatting.LIGHT_GRAY);
+			enchantLevel = TextFormatting.formatted(enchantLevel, TextFormatting.YELLOW);
 
 			enchantmentText.append(enchantName + " " + enchantLevel + "\n");
 		}
