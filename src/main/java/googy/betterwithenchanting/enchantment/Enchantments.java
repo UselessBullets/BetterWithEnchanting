@@ -1,9 +1,6 @@
 package googy.betterwithenchanting.enchantment;
 
-import googy.betterwithenchanting.enchantment.enchantments.BaitEnchantment;
-import googy.betterwithenchanting.enchantment.enchantments.FlameEnchantment;
-import googy.betterwithenchanting.enchantment.enchantments.HasteEnchantment;
-import googy.betterwithenchanting.enchantment.enchantments.UnbreakingEnchantment;
+import googy.betterwithenchanting.enchantment.enchantments.*;
 import net.minecraft.core.item.Item;
 
 import java.util.ArrayList;
@@ -35,9 +32,11 @@ public class Enchantments
 		return enchantments;
 	}
 
-	public static Enchantment haste = new HasteEnchantment("haste", 1, Enchantment.Rarity.RARE, EnchantmentTarget.DIGGER);
+	public static Enchantment haste = new HasteEnchantment("haste", 1, Enchantment.Rarity.COMMON, EnchantmentTarget.DIGGER);
 	public static Enchantment unbreaking = new UnbreakingEnchantment("unbreaking", 2, Enchantment.Rarity.COMMON, EnchantmentTarget.BREAKABLE);
+	public static Enchantment quickstrike = new QuickstrikeEnchantment("quickstrike", 3, Enchantment.Rarity.RARE, EnchantmentTarget.TOOL);
 	public static Enchantment flame = new FlameEnchantment("flame", 5, Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON);
-	public static Enchantment bait = new BaitEnchantment("bait", 6, Enchantment.Rarity.RARE, EnchantmentTarget.FISHING_ROD);
+	public static Enchantment bait = new BaitEnchantment("bait", 8, Enchantment.Rarity.RARE, EnchantmentTarget.FISHING_ROD);
+
 
 }

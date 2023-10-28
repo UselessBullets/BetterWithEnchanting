@@ -8,18 +8,26 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.sound.block.BlockSound;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.tag.BlockTags;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.EntityHelper;
 import turniplabs.halplibe.helper.NetworkHelper;
+import turniplabs.halplibe.helper.RecipeHelper;
+import turniplabs.halplibe.util.ConfigHandler;
+
+import java.util.Properties;
 
 
 public class BetterWithEnchanting implements ModInitializer {
     public static final String MOD_ID = "betterwithenchanting";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
 
-	Block enchantmentTable = new BlockBuilder(MOD_ID)
+
+
+	public static final Block enchantmentTable = new BlockBuilder(MOD_ID)
 		.setBlockSound(new BlockSound("step.stone", "step.stone", 1.0f, 1.0f))
 		.setHardness(5)
 		.setResistance(1200)
@@ -28,11 +36,20 @@ public class BetterWithEnchanting implements ModInitializer {
 		.setBottomTexture("enchantment_table/bottom.png")
 		.setSideTextures("enchantment_table/side.png")
 		.setTopTexture("enchantment_table/top.png")
-		.build(new BlockEnchantmentTable("enchantmenttable", 14150));
+		.build(new BlockEnchantmentTable("enchantmenttable", Global.config.getInt("enchantment_table_id")));
+
 
 	static {
 		EntityHelper.createTileEntity(TileEntityEnchantmentTable.class, "EnchantmentTable");
 
+		RecipeHelper.Crafting.createRecipe(new ItemStack(enchantmentTable), new Object[]{
+			" B ",
+			"DCD",
+			"CCC",
+			'B', Item.book,
+			'C', Block.cobbleStone,
+			'D', Global.config.getBoolean("expensive_crafting") ? Block.blockDiamond : Item.diamond
+		});
 	}
 
 	public BetterWithEnchanting()
@@ -45,6 +62,8 @@ public class BetterWithEnchanting implements ModInitializer {
     public void onInitialize() {
 
 		LOG.info("BetterWithEnchanting initialized!");
+
+
 
     }
 }

@@ -24,13 +24,16 @@ public class GuiTooltipMixin
 		String toolTip = info.getReturnValue();
 
 		StringBuilder enchantmentText = new StringBuilder();
-
 		List<EnchantmentData> enchantmentsData = EnchantmentUtils.getEnchantments(stack);
 
 		for (EnchantmentData enchantData : enchantmentsData)
 		{
-			String enchantName = enchantData.enchantment == null ? "Unknown" : TextUtils.format(enchantData.enchantment.getName(), TextFormatting.LIGHT_GRAY);
-			String enchantLevel = TextUtils.format(String.valueOf(enchantData.level), TextFormatting.YELLOW);
+			boolean isNull = enchantData.enchantment == null;
+			boolean noLevel = isNull || enchantData.enchantment.getMinLevel() == enchantData.enchantment.getMaxLevel();
+
+			String enchantName = isNull ? "Unknown" : TextUtils.format(enchantData.enchantment.getName(), TextFormatting.LIGHT_GRAY);
+            String enchantLevel = noLevel ? "" : TextUtils.format(String.valueOf(enchantData.level), TextFormatting.YELLOW);
+
 			enchantmentText.append(enchantName + " " + enchantLevel + "\n");
 		}
 

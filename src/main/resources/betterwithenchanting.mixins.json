@@ -11,13 +11,15 @@
       "NetServerHandlerMixin",
       "NetClientHandlerMixin",
       "ItemStackMixin",
+      "EntityLivingMixin",
       "EntityBobberMixin",
       "ItemToolMixin",
       "WorldMixin",
-      "PacketMixin",
-      "GuiTooltipMixin"
+      "PacketMixin"
     ],
     "client": [
+      "GuiTooltipMixin",
+      "PlayerControllerMixin"
     ],
     "injectors": {
         "defaultRequire": 1

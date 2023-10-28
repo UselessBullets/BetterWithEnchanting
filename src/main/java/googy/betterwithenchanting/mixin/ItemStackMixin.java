@@ -38,18 +38,5 @@ public class ItemStackMixin
 		return damage;
 	}
 
-	@Inject(method = "useItemRightClick", at = @At("HEAD"))
-	void useItemRightClick(World world, EntityPlayer player, CallbackInfoReturnable<ItemStack> info)
-	{
-		ItemStack stack = (ItemStack) (Object) this;
-
-		if (!(stack.getItem() instanceof ItemBow)) return;
-
-		int flameLevel = EnchantmentUtils.getLevel(stack, Enchantments.flame);
-		if (flameLevel <= 0) return;
-
-
-
-	}
 
 }

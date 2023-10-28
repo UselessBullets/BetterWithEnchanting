@@ -13,6 +13,7 @@ public class EnchantmentTarget
 	public static final ArmorChest ARMOR_CHEST = new ArmorChest();
 	public static final ArmorLegs ARMOR_LEGS = new ArmorLegs();
 	public static final ArmorFeet ARMOR_FEET = new ArmorFeet();
+	public static final Tool TOOL = new Tool();
 	public static final Digger DIGGER = new Digger();
 	public static final Weapon WEAPON = new Weapon();
 	public static final Sword SWORD = new Sword();
@@ -63,6 +64,15 @@ public class EnchantmentTarget
 		public boolean canEnchant(Item item)
 		{
 			return ((ItemArmor)item).armorPiece == 3;
+		}
+	}
+
+	public static class Tool extends EnchantmentTarget
+	{
+		public boolean canEnchant(Item item)
+		{
+			return item instanceof ItemTool ||
+				item instanceof ItemToolSword; // somehow ItemToolSword doesn't inherit from ItemTool
 		}
 	}
 

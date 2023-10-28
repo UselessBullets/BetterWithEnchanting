@@ -3,7 +3,7 @@ package googy.betterwithenchanting.mixin;
 import googy.betterwithenchanting.Global;
 import googy.betterwithenchanting.block.entity.TileEntityEnchantmentTable;
 import googy.betterwithenchanting.interfaces.mixins.IEntityPlayer;
-import googy.betterwithenchanting.player.inventory.ContainerEnchantmentTable;
+import googy.betterwithenchanting.inventory.ContainerEnchantmentTable;
 import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.net.packet.Packet100OpenWindow;

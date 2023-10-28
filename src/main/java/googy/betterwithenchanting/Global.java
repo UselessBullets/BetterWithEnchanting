@@ -1,12 +1,13 @@
 package googy.betterwithenchanting;
 
+import turniplabs.halplibe.util.ConfigHandler;
+
+import java.util.Properties;
+
 public class Global
 {
 	// Max enchanting cost
 	public static int MAX_ENCHANTMENT_COST = 12000;
-
-	// Max amount of enchantments applied when enchanting
-	public static int MAX_ENCHANTS_PER_ENCHANT = 3;
 
 	public static int START_COST_OFFSET = 5;
 
@@ -15,4 +16,14 @@ public class Global
 	public static String ENCHANTMENT_TABLE_NAME = "Enchantment Table";
 
 	public static int PACKET_ENCHANT_ID = 190;
+
+	public static final ConfigHandler config;
+	static {
+		Properties prop = new Properties();
+		prop.setProperty("expensive_crafting", "true");
+		prop.setProperty("enchantment_table_id", "116");
+		prop.setProperty("default_item_enchantability", "15");
+
+		config = new ConfigHandler(BetterWithEnchanting.MOD_ID, prop);
+	}
 }

@@ -1,10 +1,9 @@
-package googy.betterwithenchanting.player.inventory;
+package googy.betterwithenchanting.inventory;
 
 import googy.betterwithenchanting.block.entity.TileEntityEnchantmentTable;
 import googy.betterwithenchanting.enchantment.Enchantment;
 import googy.betterwithenchanting.enchantment.EnchantmentData;
 import googy.betterwithenchanting.enchantment.Enchantments;
-import googy.betterwithenchanting.player.inventory.slot.EnchantFuelSlot;
 import googy.betterwithenchanting.utils.EnchantmentUtils;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.block.Block;
@@ -66,7 +65,7 @@ public class ContainerEnchantmentTable extends Container
 		if (enchantments == null) return false;
 
 		EnchantmentUtils.addEnchantments(stack, enchantments);
-		updateInventory();
+		forceUpdateInventory();
 
 		return true;
 	}
@@ -148,6 +147,24 @@ public class ContainerEnchantmentTable extends Container
 		}
 	}
 
+	public void forceUpdateInventory()
+	{
+		for (int i = 0; i < this.inventorySlots.size(); i++)
+		{
+			ItemStack stack = inventorySlots.get(i).getStack();
+
+			ItemStack stackCopy = stack != null ? stack.copy() : null;
+			inventoryItemStacks.set(i, stackCopy);
+
+			for (ICrafting crafter : this.crafters)
+			{
+				crafter.updateInventorySlot(this, i, stackCopy);
+			}
+		}
+
+		updateInventory();
+	}
+
 	@Override
 	public void updateClientProgressBar(int id, int value)
 	{
@@ -157,8 +174,6 @@ public class ContainerEnchantmentTable extends Container
 
 	public boolean playerCanEnchant(EntityPlayer player, int option)
 	{
-		//BetterWithEnchanting.LOG.info(option+" "+getFuelAmount());
-
 		return getSlot(0).hasStack() &&
 			EnchantmentUtils.getEnchantments(getSlot(0).getStack()).isEmpty() &&
 			(player.score >= enchantCost[option] || player.gamemode.id == Gamemode.creative.id) &&

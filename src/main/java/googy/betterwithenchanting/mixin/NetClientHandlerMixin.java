@@ -1,5 +1,6 @@
 package googy.betterwithenchanting.mixin;
 
+import googy.betterwithenchanting.BetterWithEnchanting;
 import googy.betterwithenchanting.Global;
 import googy.betterwithenchanting.block.entity.TileEntityEnchantmentTable;
 import googy.betterwithenchanting.interfaces.mixins.IEntityPlayer;
@@ -7,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.net.handler.NetClientHandler;
 import net.minecraft.core.block.entity.TileEntityFurnace;
 import net.minecraft.core.net.packet.Packet100OpenWindow;
+import net.minecraft.core.net.packet.Packet103SetSlot;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,4 +34,5 @@ public class NetClientHandlerMixin
 		this.mc.thePlayer.craftingInventory.windowId = packet.windowId;
 
 	}
+
 }

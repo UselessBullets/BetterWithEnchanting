@@ -1,11 +1,9 @@
-package googy.betterwithenchanting.player.inventory.slot;
+package googy.betterwithenchanting.inventory;
 
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import java.util.stream.IntStream;
 
 public class EnchantFuelSlot extends Slot
 {

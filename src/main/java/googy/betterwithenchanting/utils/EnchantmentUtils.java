@@ -2,6 +2,7 @@ package googy.betterwithenchanting.utils;
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
+import googy.betterwithenchanting.BetterWithEnchanting;
 import googy.betterwithenchanting.Global;
 import googy.betterwithenchanting.enchantment.Enchantment;
 import googy.betterwithenchanting.enchantment.EnchantmentData;
@@ -130,11 +131,9 @@ public class EnchantmentUtils
 		for (int i = 0; i < enchantList.tagCount(); i++)
 		{
 			CompoundTag enchantTag = (CompoundTag)enchantList.tagAt(i);
-			int id = enchantTag.getShort(ID_KEY);
-			int level = enchantTag.getShort(LEVEL_KEY);
 
-			if (id == enchantment.id)
-				return level;
+			if (enchantment.id == enchantTag.getShort(ID_KEY))
+				return enchantTag.getShort(LEVEL_KEY);
 		}
 
 		return 0;
@@ -167,7 +166,7 @@ public class EnchantmentUtils
 		List<EnchantmentData> enchantments = new ArrayList<>();
 		double costPercentage = (double) cost / Global.MAX_ENCHANTMENT_COST;
 
-		int itemEnchantability = 15;
+		int itemEnchantability = Global.config.getInt("default_item_enchantability");
 
 		int rand_enchantability = 1 + random.nextInt(itemEnchantability / 4 + 1) + random.nextInt(itemEnchantability / 4 + 1);
 		int k = (int) (costPercentage * (30 - 1) + 1) + rand_enchantability;

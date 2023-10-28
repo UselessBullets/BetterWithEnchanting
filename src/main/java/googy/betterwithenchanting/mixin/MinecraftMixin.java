@@ -14,9 +14,9 @@ public class MinecraftMixin
 	private static Minecraft theMinecraft;
 
 	@Inject(method = "getMinecraft(Ljava/lang/Class;)Lnet/minecraft/client/Minecraft;", at = @At("HEAD"), cancellable = true)
-	private static void getMinecraft(Class<?> caller, CallbackInfoReturnable<Minecraft> cir)
+	private static void getMinecraft(Class<?> caller, CallbackInfoReturnable<Minecraft> info)
 	{
-		cir.setReturnValue(theMinecraft);
+		info.setReturnValue(theMinecraft);
 	}
 
 }

@@ -26,7 +26,6 @@ public class ItemToolMixin
 
 		ret += hasteLevel * hasteLevel + 2;
 
-		BetterWithEnchanting.LOG.info(String.valueOf(ret));
 		info.setReturnValue(ret);
 	}
 
