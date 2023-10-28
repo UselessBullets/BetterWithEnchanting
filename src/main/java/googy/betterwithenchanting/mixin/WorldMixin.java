@@ -19,6 +19,8 @@ public class WorldMixin
 	{
 		if (entity instanceof EntityArrow arrow)
 		{
+			if (arrow.owner == null) return;
+
 			int flameLevel = EnchantmentUtils.getLevel(arrow.owner.getHeldItem(), Enchantments.flame);
 			int fireTime = flameLevel * 20; // level * second
 
