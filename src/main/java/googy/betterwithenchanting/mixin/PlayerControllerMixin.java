@@ -1,6 +1,5 @@
 package googy.betterwithenchanting.mixin;
 
-import googy.betterwithenchanting.enchantment.Enchantment;
 import googy.betterwithenchanting.enchantment.Enchantments;
 import googy.betterwithenchanting.utils.EnchantmentUtils;
 import net.minecraft.client.Minecraft;
@@ -21,7 +20,7 @@ public class PlayerControllerMixin
 	@Shadow
 	protected int blockHitDelay;
 
-	@Redirect(method = "mine", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/controller/PlayerController;blockHitDelay:I", opcode = Opcodes.GETFIELD))
+	@Redirect(method = "continueDestroyBlock", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/controller/PlayerController;blockHitDelay:I", opcode = Opcodes.GETFIELD))
 	public int getBlockHitDelay(PlayerController instance)
 	{
 		int quickstrikeLevel = EnchantmentUtils.getLevel(mc.thePlayer.getHeldItem(), Enchantments.quickstrike);

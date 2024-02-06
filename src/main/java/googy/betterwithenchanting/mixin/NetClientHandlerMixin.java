@@ -9,6 +9,7 @@ import net.minecraft.client.net.handler.NetClientHandler;
 import net.minecraft.core.block.entity.TileEntityFurnace;
 import net.minecraft.core.net.packet.Packet100OpenWindow;
 import net.minecraft.core.net.packet.Packet103SetSlot;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,6 +21,7 @@ import java.util.Objects;
 @Mixin(value= NetClientHandler.class, remap = false)
 public class NetClientHandlerMixin
 {
+	@Final
 	@Shadow
 	private Minecraft mc;
 

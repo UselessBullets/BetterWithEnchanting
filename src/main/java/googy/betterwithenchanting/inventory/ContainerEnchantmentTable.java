@@ -25,7 +25,7 @@ public class ContainerEnchantmentTable extends Container
 	public TileEntityEnchantmentTable enchantmentTable;
 	public int[] enchantCost = new int[3];
 
-	private Random random = new Random();
+	private final Random random = new Random();
 
 	public ContainerEnchantmentTable(InventoryPlayer inventoryplayer, TileEntityEnchantmentTable enchantmentTable)
 	{
@@ -53,7 +53,7 @@ public class ContainerEnchantmentTable extends Container
 		if (!playerCanEnchant(player, enchantOption)) return false;
 
 		int cost = enchantCost[enchantOption];
-		if (player.gamemode.id != Gamemode.creative.id)
+		if (player.gamemode != Gamemode.creative)
 		{
 			player.score -= cost;
 			if (getSlot(1).hasStack())
@@ -91,9 +91,9 @@ public class ContainerEnchantmentTable extends Container
 		if (pool.isEmpty()) return;
 
 
-		int posX = enchantmentTable.xCoord;
-		int posY = enchantmentTable.yCoord;
-		int posZ = enchantmentTable.zCoord;
+		int posX = enchantmentTable.x;
+		int posY = enchantmentTable.y;
+		int posZ = enchantmentTable.z;
 
 		int bookshelfs = 0;
 
@@ -176,8 +176,8 @@ public class ContainerEnchantmentTable extends Container
 	{
 		return getSlot(0).hasStack() &&
 			EnchantmentUtils.getEnchantments(getSlot(0).getStack()).isEmpty() &&
-			(player.score >= enchantCost[option] || player.gamemode.id == Gamemode.creative.id) &&
-			(getFuelAmount() > option || player.gamemode.id == Gamemode.creative.id);
+			(player.score >= enchantCost[option] || player.gamemode == Gamemode.creative) &&
+			(getFuelAmount() > option || player.gamemode == Gamemode.creative);
 	}
 
 	public int getFuelAmount()

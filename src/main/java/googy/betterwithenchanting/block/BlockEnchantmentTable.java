@@ -26,7 +26,7 @@ public class BlockEnchantmentTable extends BlockTileEntity
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isSolidRender()
 	{
 		return false;
 	}

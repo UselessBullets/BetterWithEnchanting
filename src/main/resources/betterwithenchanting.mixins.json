@@ -4,7 +4,6 @@
     "package": "googy.betterwithenchanting.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
-      "MinecraftMixin",
       "EntityPlayerMixin",
       "EntityPlayerMPMixin",
       "EntityPlayerSPMixin",
