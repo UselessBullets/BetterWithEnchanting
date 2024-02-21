@@ -17,8 +17,9 @@ public class WorldMixin
 	@Inject(method = "entityJoinedWorld", at = @At("HEAD"))
 	void entityJoinedWorld(Entity entity, CallbackInfoReturnable<Boolean> info)
 	{
-		if (entity instanceof EntityArrow arrow)
+		if (entity instanceof EntityArrow)
 		{
+			EntityArrow arrow = (EntityArrow) entity;
 			if (arrow.owner == null) return;
 
 			int flameLevel = EnchantmentUtils.getLevel(arrow.owner.getHeldItem(), Enchantments.flame);

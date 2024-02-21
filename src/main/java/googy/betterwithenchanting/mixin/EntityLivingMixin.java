@@ -18,7 +18,8 @@ public class EntityLivingMixin
 	@Inject(method = "hurt", at = @At(value = "RETURN"))
 	public void getHeartsFlashTime(Entity attacker, int damage, DamageType type, CallbackInfoReturnable<Boolean> info)
 	{
-		if (!(attacker instanceof EntityPlayer player)) return;
+		if (!(attacker instanceof EntityPlayer)) return;
+		EntityPlayer player = (EntityPlayer)attacker;
 
 		EntityLiving thisLiving = (EntityLiving) (Object) this;
 
