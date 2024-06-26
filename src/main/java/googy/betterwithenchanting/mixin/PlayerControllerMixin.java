@@ -21,7 +21,7 @@ public class PlayerControllerMixin
 	@Shadow
 	protected int blockHitDelay;
 
-	@Redirect(method = "mine", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/controller/PlayerController;blockHitDelay:I", opcode = Opcodes.GETFIELD))
+	@Redirect(method = "continueDestroyBlock(IIILnet/minecraft/core/util/helper/Side;DD)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/controller/PlayerController;blockHitDelay:I", opcode = Opcodes.GETFIELD))
 	public int getBlockHitDelay(PlayerController instance)
 	{
 		int quickstrikeLevel = EnchantmentUtils.getLevel(mc.thePlayer.getHeldItem(), Enchantments.quickstrike);

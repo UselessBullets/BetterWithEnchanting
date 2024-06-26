@@ -8,7 +8,7 @@ public class GuiUtils
 	public static int getGuiTexture(String texture)
 	{
 		Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
-		return mc.renderEngine.getTexture("/assets/" + BetterWithEnchanting.MOD_ID + "/gui/" + texture);
+		return mc.renderEngine.getTexture("/assets/" + BetterWithEnchanting.MOD_ID + "/textures/gui/" + texture);
 	}
 
 }

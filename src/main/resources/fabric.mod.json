@@ -6,8 +6,11 @@
   "name": "Better With Enchanting",
   "description": "Adds enchanting",
   "authors": [
-    ""
+    "dopeasswizard"
   ],
+	"contributors": [
+		"Useless"
+	],
   "contact": {
     "homepage": "",
     "sources": ""
@@ -19,14 +22,22 @@
   "entrypoints": {
     "main": [
 			"googy.betterwithenchanting.BetterWithEnchanting"
-    ]
+    ],
+		"beforeGameStart": [
+			"googy.betterwithenchanting.BetterWithEnchanting"
+		],
+		"recipesReady": [
+			"googy.betterwithenchanting.BetterWithEnchanting"
+		]
   },
   "mixins": [
       "betterwithenchanting.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.13.3"
+    "fabricloader": ">=0.13.3",
+		"halplibe": ">=4.1.0",
+		"minecraft": ">=7.2-beta"
   },
   "suggests": {
   }

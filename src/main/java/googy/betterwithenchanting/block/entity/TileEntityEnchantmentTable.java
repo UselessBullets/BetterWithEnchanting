@@ -3,14 +3,10 @@ package googy.betterwithenchanting.block.entity;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import googy.betterwithenchanting.Global;
-import googy.betterwithenchanting.enchantment.Enchantments;
-import googy.betterwithenchanting.utils.EnchantmentUtils;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
-
-import java.util.Map;
 
 public class TileEntityEnchantmentTable extends TileEntity implements IInventory
 {
@@ -106,10 +102,15 @@ public class TileEntityEnchantmentTable extends TileEntity implements IInventory
 	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{
-		if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this) {
+		if (worldObj.getBlockTileEntity(x, y, z) != this) {
 			return false;
 		}
 
-		return player.distanceToSqr(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) <= 64.0;
+		return player.distanceToSqr(x + 0.5, y + 0.5, z + 0.5) <= 64.0;
+	}
+
+	@Override
+	public void sortInventory() {
+
 	}
 }

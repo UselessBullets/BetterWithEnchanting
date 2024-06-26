@@ -1,17 +1,14 @@
 package googy.betterwithenchanting.mixin;
 
-import googy.betterwithenchanting.BetterWithEnchanting;
 import googy.betterwithenchanting.enchantment.Enchantments;
 import googy.betterwithenchanting.utils.EnchantmentUtils;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityBobber;
-import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
@@ -31,7 +28,7 @@ public abstract class EntityBobberMixin extends Entity
 
 		EntityBobber thisBobber = (EntityBobber) (Object) this;
 
-		ItemStack stack = thisBobber.angler.getCurrentEquippedItem();
+		ItemStack stack = thisBobber.player.getCurrentEquippedItem();
 		int baitLevel = EnchantmentUtils.getLevel(stack, Enchantments.bait);
 
 		int rate = catchRate - (baitLevel * 100);

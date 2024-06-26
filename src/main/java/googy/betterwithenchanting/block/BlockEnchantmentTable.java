@@ -13,6 +13,7 @@ import net.minecraft.core.block.entity.TileEntityFurnace;
 import net.minecraft.core.block.entity.TileEntityTrommel;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 
@@ -26,13 +27,13 @@ public class BlockEnchantmentTable extends BlockTileEntity
 	}
 
 	@Override
-	public boolean isOpaqueCube()
+	public boolean isSolidRender()
 	{
 		return false;
 	}
 
 	@Override
-	public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player)
+	public boolean onBlockRightClicked(World world, int x, int y, int z, EntityPlayer player, Side side, double xHit, double yHit)
 	{
 		if (world.isClientSide) return true;
 
